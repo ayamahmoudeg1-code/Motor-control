@@ -2,6 +2,7 @@
 
 #include "CytronMD10A.h"
 #include "L298N.h"
+#include "BTS7960.h"
 
 #define potPin  PA2
 // defining l298n pins 
@@ -11,6 +12,13 @@
 // defining cytron pins
 #define PWM  PA6
 #define DIR  PA12
+// defining BTS7960 pins
+#define RPWM PA7
+#define LPWM PA8
+#define R_EN PB2
+#define L_EN PB12
+
+
 
   
 void setup() 
@@ -20,10 +28,19 @@ void setup()
   analogReadResolution(12);     // 12-bit ADC range: 0 to 4095
   analogWriteFrequency(20000);  // Set 20kHz switching frequency
 
-  pinMode(potPin, INPUT);
+  pinMode(potPin, INPUT); // sitting potentiometer pin mode
+
+  //BTS7960 enable pins
+  pinMode(R_EN, OUTPUT);
+  pinMode(L_EN, OUTPUT);
+  //Enable the driver
+  digitalWrite(R_EN, HIGH);
+  digitalWrite(L_EN, HIGH);
+
 
   L298N_init(IN1,IN2,ENA); // Call initialization 
   Cytron_init(DIR,PWM); // Call initialization 
+  BTS_init(RPWM,LPWM); // Call initialization
 
 
 }
@@ -54,6 +71,7 @@ void loop()
 
   L298N_drive(IN1,IN2,ENA,speed_in_pwm); // Calling L298N driving method
   Cytron_drive(DIR,PWM,speed_in_pwm); // Calling cytron driving method
+  BTS_drive(RPWM,LPWM,speed_in_pwm); // Calling BTS7960 driving method
   
 
 }
