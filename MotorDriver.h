@@ -5,9 +5,10 @@ class MotorDriver
 {
   
  public:
-{
- virsual void Drive(int speed_in_pwm) const ; 
 
-}
+
+ virtual void Drive(int speed_in_pwm) const = 0; 
+
+};
 
 #endif //Motor_Driver_H 

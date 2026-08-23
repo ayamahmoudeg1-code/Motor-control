@@ -4,39 +4,42 @@
 #include <Arduino.h>
 
 
-CytronMD motor1(PWM_DIR, PA6, PA12);
-
 void CytronMD10A::Cytron_init() 
 {
 
   //Pins mode is handeled by the cytron library internally. No complex code needed
 }
 
-void Drive(int speed_in_pwm) const override 
+void CytronMD10A::Drive(int speed_in_pwm) const 
 {
   if (speed_in_pwm> 0)
   {
-    motor1.setSpeed(speed_in_pwm);
+    motor.setSpeed(speed_in_pwm);
 
     Serial.print("cytron speed: ");
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
+    delay(3000);
   }
   else if (speed_in_pwm < 0 )
   {
-    motor1.setSpeed(abs(speed_in_pwm));
+    motor.setSpeed(abs(speed_in_pwm));
 
     Serial.print("cytron speed: ");
     Serial.println( speed_in_pwm);
 
-    Serial.println("Moving backward");
+    Serial.println("Moving backward"); 
+    delay(3000);
+
   }
   else
   {
-    motor1.setSpeed(0);
+    motor.setSpeed(0);
      
     Serial.println("Stopped. currently at rest");
+    delay(3000);
+
     
   }
 }

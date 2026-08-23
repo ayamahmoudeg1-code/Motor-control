@@ -4,7 +4,7 @@
 
 
 //Initializing pins 
-void L298N::L298N_init(int IN1, int IN2 , int ENA)
+void L298N::L298N_init()
 {
   pinMode(ENA, OUTPUT);
   pinMode(IN1, OUTPUT);
@@ -17,7 +17,7 @@ void L298N::L298N_init(int IN1, int IN2 , int ENA)
 }
 
 // Main driving logic
-void L298N::Drive(int speed_in_pwm) const override 
+void L298N::Drive(int speed_in_pwm) const 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -30,6 +30,8 @@ void L298N::Drive(int speed_in_pwm) const override
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
+    delay(3000);
+
   }
   // backward movement
   else if  (speed_in_pwm <0)
@@ -42,6 +44,8 @@ void L298N::Drive(int speed_in_pwm) const override
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving backward");
+    delay(3000);
+
   }
   // stopping
   else
@@ -51,6 +55,8 @@ void L298N::Drive(int speed_in_pwm) const override
     analogWrite(ENA,0);
   
     Serial.println("Stopped. currently at rest");
+    delay(3000);
+
   }
   
 }

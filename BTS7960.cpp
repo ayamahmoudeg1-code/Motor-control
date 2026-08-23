@@ -15,7 +15,7 @@ void BTS7960::BTS_init()
  
 }
 
-void Drive(int speed_in_pwm) const override 
+void BTS7960::Drive(int speed_in_pwm) const 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -27,6 +27,8 @@ void Drive(int speed_in_pwm) const override
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
+    delay(3000);
+
   }
   // backward movement
   else if  (speed_in_pwm <0)
@@ -38,6 +40,8 @@ void Drive(int speed_in_pwm) const override
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving backward");
+    delay(3000);
+
   }
   // stopping
   else
@@ -47,5 +51,7 @@ void Drive(int speed_in_pwm) const override
     analogWrite(LPWM,0);
 
     Serial.println("Stopped. currently at rest");
+    delay(3000);
+
   }
 }

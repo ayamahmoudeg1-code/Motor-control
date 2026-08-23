@@ -1,6 +1,6 @@
 #ifndef  BTS7960_H
 #define  BTS7960_H
-
+#include "MotorDriver.h"
 #include <Arduino.h>
 
 class BTS7960 : public MotorDriver
@@ -19,6 +19,6 @@ class BTS7960 : public MotorDriver
   void BTS_init();
   void Drive(int speed_in_pwm) const override;
 
-}
+};
 
 #endif //BTS7960_H

@@ -1,5 +1,5 @@
 #include <CytronMotorDriver.h>
-
+#include "MotorDriver.h"
 #include "CytronMD10A.h"
 #include "L298N.h"
 #include "BTS7960.h"
@@ -63,7 +63,7 @@ void loop()
     speed_in_pwm = map(potVal, 2101, 4095, 0, 255); 
   }
 
-  motor1.Drive(speed_in_pwm); // Calling L298N driving method
+  motor.Drive(speed_in_pwm); // Calling L298N driving method
   motor2.Drive(speed_in_pwm);// Calling cytron driving method
   motor3.Drive(speed_in_pwm);// Calling BTS7960 driving method
   
