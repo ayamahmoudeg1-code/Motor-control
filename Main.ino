@@ -18,7 +18,7 @@
 #define R_EN PB2
 #define L_EN PB12
 
-
+//creating the three motor classes' objects 
 L298N motor(ENA, IN1, IN2);
 CytronMD10A motor2(PWM, DIR);
 BTS7960 motor3(RPWM, LPWM, R_EN, L_EN);
@@ -33,7 +33,7 @@ void setup()
   pinMode(potPin, INPUT); // sitting potentiometer pin mode
 
   motor.L298N_init(); // Call initialization 
-  motor2.Cytron_init(); // Call initialization 
+  motor2.Cytron_init(); // does not do anything as library handles it
   motor3.BTS_init(); // Call initialization
 
 

@@ -10,8 +10,11 @@ void CytronMD10A::Cytron_init()
   //Pins mode is handeled by the cytron library internally. No complex code needed
 }
 
-void CytronMD10A::Drive(int speed_in_pwm) const 
+// driving states
+void CytronMD10A::Drive(int speed_in_pwm) 
 {
+
+  // I could have wrote one (motor.SetSpeed) with no abs() as the library handles it but i'm not sure how it works exactly
   if (speed_in_pwm> 0)
   {
     motor.setSpeed(speed_in_pwm);
@@ -20,17 +23,16 @@ void CytronMD10A::Drive(int speed_in_pwm) const
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
-    delay(3000);
   }
   else if (speed_in_pwm < 0 )
   {
-    motor.setSpeed(abs(speed_in_pwm));
+    motor.setSpeed(abs(speed_in_pwm)); 
+
 
     Serial.print("cytron speed: ");
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving backward"); 
-    delay(3000);
 
   }
   else
@@ -38,7 +40,6 @@ void CytronMD10A::Drive(int speed_in_pwm) const
     motor.setSpeed(0);
      
     Serial.println("Stopped. currently at rest");
-    delay(3000);
 
     
   }

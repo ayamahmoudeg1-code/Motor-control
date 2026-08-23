@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 
-//Initializing pins 
+//setting pins mode
 void L298N::L298N_init()
 {
   pinMode(ENA, OUTPUT);
@@ -16,8 +16,8 @@ void L298N::L298N_init()
 
 }
 
-// Main driving logic
-void L298N::Drive(int speed_in_pwm) const 
+// driving states
+void L298N::Drive(int speed_in_pwm) 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -30,7 +30,6 @@ void L298N::Drive(int speed_in_pwm) const
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
-    delay(3000);
 
   }
   // backward movement
@@ -38,13 +37,12 @@ void L298N::Drive(int speed_in_pwm) const
   {
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
-    analogWrite(ENA, abs(speed_in_pwm));
+    analogWrite(ENA, abs(speed_in_pwm)); //using abs beacuse the analogWrite expects non-negative magnitude PWM duty value
 
     Serial.print("speed: ");
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving backward");
-    delay(3000);
 
   }
   // stopping
@@ -55,7 +53,6 @@ void L298N::Drive(int speed_in_pwm) const
     analogWrite(ENA,0);
   
     Serial.println("Stopped. currently at rest");
-    delay(3000);
 
   }
   

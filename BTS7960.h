@@ -14,10 +14,10 @@ class BTS7960 : public MotorDriver
   
   public:
 
-  BTS7960(int RPWM, int LPWM, int R_EN, int L_EN): RPWM(RPWM), LPWM(LPWM), R_EN(R_EN), L_EN(L_EN) {}
+  BTS7960(int RPWM, int LPWM, int R_EN, int L_EN): RPWM(RPWM), LPWM(LPWM), R_EN(R_EN), L_EN(L_EN) {} //constructor
 
   void BTS_init();
-  void Drive(int speed_in_pwm) const override;
+  void Drive(int speed_in_pwm) override;
 
 };
 

@@ -7,7 +7,7 @@ class MotorDriver
  public:
 
 
- virtual void Drive(int speed_in_pwm) const = 0; 
+ virtual void Drive(int speed_in_pwm)  = 0; //parent speed controlling method
 
 };
 

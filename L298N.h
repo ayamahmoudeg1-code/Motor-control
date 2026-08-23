@@ -13,10 +13,10 @@ class L298N : public MotorDriver
 
   public:
 
-  L298N(int ENA, int IN1, int IN2): ENA(ENA), IN1(IN1), IN2(IN2){}
+  L298N(int ENA, int IN1, int IN2): ENA(ENA), IN1(IN1), IN2(IN2){} //constructor
 
   void L298N_init();
-  void Drive(int speed_in_pwm) const override;
+  void Drive(int speed_in_pwm) override;
 
 };
 #endif //L298N_H

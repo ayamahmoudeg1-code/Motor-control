@@ -2,6 +2,7 @@
 #include "BTS7960.h"
 #include <Arduino.h>
 
+//setting pins mode
 void BTS7960::BTS_init()
 {
   pinMode(RPWM, OUTPUT);
@@ -15,7 +16,8 @@ void BTS7960::BTS_init()
  
 }
 
-void BTS7960::Drive(int speed_in_pwm) const 
+// driving states
+void BTS7960::Drive(int speed_in_pwm) 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -27,20 +29,21 @@ void BTS7960::Drive(int speed_in_pwm) const
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving forward");
-    delay(3000);
+    
 
   }
   // backward movement
   else if  (speed_in_pwm <0)
   {
     analogWrite(RPWM,0);
-    analogWrite(LPWM,abs(speed_in_pwm));
+    analogWrite(LPWM,abs(speed_in_pwm)); //using abs beacuse the analogWrite expects non-negative magnitude PWM duty value
+
 
     Serial.print("BTS speed: ");
     Serial.println( speed_in_pwm);
 
     Serial.println("Moving backward");
-    delay(3000);
+    
 
   }
   // stopping
@@ -51,7 +54,7 @@ void BTS7960::Drive(int speed_in_pwm) const
     analogWrite(LPWM,0);
 
     Serial.println("Stopped. currently at rest");
-    delay(3000);
+    
 
   }
 }
