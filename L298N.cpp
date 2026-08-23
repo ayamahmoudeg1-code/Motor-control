@@ -1,11 +1,10 @@
+#include "MotorDriver.h"
 #include "L298N.h"
 #include <Arduino.h>
-#include <iostream>
 
-using namespace std;
 
 //Initializing pins 
-void L298N_init(int IN1, int IN2 , int ENA)
+void L298N::L298N_init(int IN1, int IN2 , int ENA)
 {
   pinMode(ENA, OUTPUT);
   pinMode(IN1, OUTPUT);
@@ -18,7 +17,7 @@ void L298N_init(int IN1, int IN2 , int ENA)
 }
 
 // Main driving logic
-void L298N_drive(int IN1,int IN2, int ENA, int speed_in_pwm)
+void L298N::Drive(int speed_in_pwm) const override 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -37,7 +36,7 @@ void L298N_drive(int IN1,int IN2, int ENA, int speed_in_pwm)
   {
     digitalWrite(IN1, LOW);
     digitalWrite(IN2, HIGH);
-    analogWrite(ENA, speed_in_pwm);
+    analogWrite(ENA, abs(speed_in_pwm));
 
     Serial.print("speed: ");
     Serial.println( speed_in_pwm);

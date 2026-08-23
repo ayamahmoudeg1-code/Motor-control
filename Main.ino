@@ -19,7 +19,9 @@
 #define L_EN PB12
 
 
-
+L298N motor(ENA, IN1, IN2);
+CytronMD10A motor2(PWM, DIR);
+BTS7960 motor3(RPWM, LPWM, R_EN, L_EN);
   
 void setup() 
 {
@@ -30,17 +32,9 @@ void setup()
 
   pinMode(potPin, INPUT); // sitting potentiometer pin mode
 
-  //BTS7960 enable pins
-  pinMode(R_EN, OUTPUT);
-  pinMode(L_EN, OUTPUT);
-  //Enable the driver
-  digitalWrite(R_EN, HIGH);
-  digitalWrite(L_EN, HIGH);
-
-
-  L298N_init(IN1,IN2,ENA); // Call initialization 
-  Cytron_init(DIR,PWM); // Call initialization 
-  BTS_init(RPWM,LPWM); // Call initialization
+  motor.L298N_init(); // Call initialization 
+  motor2.Cytron_init(); // Call initialization 
+  motor3.BTS_init(); // Call initialization
 
 
 }
@@ -69,9 +63,9 @@ void loop()
     speed_in_pwm = map(potVal, 2101, 4095, 0, 255); 
   }
 
-  L298N_drive(IN1,IN2,ENA,speed_in_pwm); // Calling L298N driving method
-  Cytron_drive(DIR,PWM,speed_in_pwm); // Calling cytron driving method
-  BTS_drive(RPWM,LPWM,speed_in_pwm); // Calling BTS7960 driving method
+  motor1.Drive(speed_in_pwm); // Calling L298N driving method
+  motor2.Drive(speed_in_pwm);// Calling cytron driving method
+  motor3.Drive(speed_in_pwm);// Calling BTS7960 driving method
   
 
 }

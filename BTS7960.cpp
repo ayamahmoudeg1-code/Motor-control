@@ -1,16 +1,21 @@
+#include "MotorDriver.h"
 #include "BTS7960.h"
-
 #include <Arduino.h>
-#include <iostream>
 
-void BTS_init(int RPWM, int LPWM)
+void BTS7960::BTS_init()
 {
   pinMode(RPWM, OUTPUT);
   pinMode(LPWM, OUTPUT);
+  //BTS7960 enable pins
+  pinMode(R_EN, OUTPUT);
+  pinMode(L_EN, OUTPUT);
+  //Enable the driver
+  digitalWrite(R_EN, HIGH);
+  digitalWrite(L_EN, HIGH);
  
 }
 
-void BTS_drive(int RPWM, int LPWM, int speed_in_pwm)
+void Drive(int speed_in_pwm) const override 
 {
   // forward movement
    if  (speed_in_pwm >0)
@@ -27,7 +32,7 @@ void BTS_drive(int RPWM, int LPWM, int speed_in_pwm)
   else if  (speed_in_pwm <0)
   {
     analogWrite(RPWM,0);
-    analogWrite(LPWM,speed_in_pwm);
+    analogWrite(LPWM,abs(speed_in_pwm));
 
     Serial.print("BTS speed: ");
     Serial.println( speed_in_pwm);
